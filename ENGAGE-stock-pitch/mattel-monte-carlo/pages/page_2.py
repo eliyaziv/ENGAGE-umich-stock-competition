@@ -1,3 +1,8 @@
+import os
+from pathlib import Path
+
+os.chdir(Path(__file__).resolve().parent.parent)
+
 import plotly.graph_objects as go
 import pandas as pd
 import numpy as np
@@ -70,7 +75,7 @@ class LinePlot:
     def create_figure(self, fig_title, yaxis_title, xaxis_title):
         fig = go.Figure().update_layout(template ="plotly_white", title = fig_title, title_x = 0.5, title_y = 0.94, title_font_weight = 600)
         fig.update_layout(autosize = True)
-        fig.update_layout(font_family = "Georgia", font_weight = 600, font_size = 18)
+        fig.update_layout(font_family = "Georgia", font_weight = 600, font_size = 18, font_color = "#00274C")
         fig.update_layout(paper_bgcolor = "#FFFFFF")
         fig.update_layout(plot_bgcolor = "#FFFFFF")
         fig.update_yaxes(ticksuffix = " ", tickprefix = "$", title = yaxis_title, title_standoff = 20, showgrid = True, showline = False, linecolor = "#FFFFFF", zeroline = False, title_font = dict(size = 16), tickfont = dict(size = 14))
@@ -133,7 +138,7 @@ class HistPlot:
     def create_figure(self, fig_title, yaxis_title, xaxis_title):
         fig = make_subplots(rows = 2, shared_xaxes = True, vertical_spacing = 0.00, row_heights=[0.3,0.7]).update_layout(template ="plotly_white", title = fig_title, title_x = 0.5, title_y = 0.94, title_font_weight = 600)
         fig.update_layout(autosize = True)
-        fig.update_layout(font_family = "Georgia", font_weight = 600, font_size = 18)
+        fig.update_layout(font_family = "Georgia", font_weight = 600, font_size = 18, font_color = "#00274C")
         fig.update_layout(paper_bgcolor = "#FFFFFF")
         fig.update_layout(plot_bgcolor = "#FFFFFF")
         fig.update_yaxes(ticksuffix = " ", title = yaxis_title, title_standoff = 20, title_font = dict(size = 15), tickfont = dict(size = 14))
