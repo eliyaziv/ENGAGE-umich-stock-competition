@@ -1,3 +1,8 @@
+import os
+from pathlib import Path
+
+os.chdir(Path(__file__).resolve().parent.parent)
+
 import streamlit as st
 import base64
 from pathlib import Path
@@ -63,11 +68,11 @@ class HistoryPlot:
 
     def create_figure(self, fig_title, yaxis_title, xaxis_title):
         fig = go.Figure().update_layout(template ="plotly_white", title = fig_title, autosize = True, height = 420)
-        fig.update_layout(font_family = "Georgia", font_weight = 600, font_size = 18)
+        fig.update_layout(font_family = "Georgia", font_weight = 600, font_size = 18, font_color = "#00274C")
         fig.update_layout(paper_bgcolor = "#FFFFFF")
         fig.update_layout(plot_bgcolor = "#FFFFFF")
         fig.update_yaxes(ticksuffix = " ", tickprefix = "$", title = yaxis_title, title_standoff = 20, showgrid = True, showline = False, linecolor = "#FFFFFF", zeroline = False, title_font = dict(size = 20), tickfont = dict(size = 18))
-        fig.update_layout(margin=dict(t=10, b=65, l=100, r=0))
+        fig.update_layout(margin=dict(t=45, b=65, l=100, r=0))
         fig.update_xaxes(title = xaxis_title, title_standoff = 20, showgrid = True, showline = False, linecolor = "#FFFFFF", zeroline = False, title_font = dict(size = 20), tickfont = dict(size = 16), tickformat = "%b %y")
         self.plot_data(fig)
 
@@ -179,7 +184,7 @@ def main():
 
     st.divider()
 
-    quote = prices.get_quote()
+    quote = prices.get_quote(history)
 
     prev_close = float(history["AdjClose"].iloc[-2])
     change = last_close - prev_close
@@ -191,15 +196,15 @@ def main():
     if quote["marketCap"]:
         cards.append(fact_card("Market cap", money(quote["marketCap"])))
     if quote["averageVolume"]:
-        cards.append(fact_card("Avg. daily volume", count(quote["averageVolume"]), "shares"))
+        cards.append(fact_card("Avg. daily volume", count(quote["averageVolume"]), "last 3 months"))
     if quote["shortPercentOfFloat"] is not None:
         cards.append(fact_card("Short interest", f"{quote['shortPercentOfFloat'] * 100:.1f}%", "of float"))
-    if quote["beta"] is not None:
-        cards.append(fact_card("Beta", f"{quote['beta']:.2f}", "vs S&P 500"))
-    if quote["earnings_date"]:
-        cards.append(fact_card("Next earnings", quote["earnings_date"]))
+    if quote["earnings_date"] and pd.Timestamp(quote["earnings_date"]) >= pd.Timestamp(datetime.now().date()):
+        cards.append(fact_card("Next earnings", pd.Timestamp(quote["earnings_date"]).strftime("%d.%m.%Y")))
 
-    st.markdown('<div class="fact-row">' + "".join(cards) + '</div>' + f'<div class="fact-source">MAT as of {last_date}, {source}</div>', unsafe_allow_html = True)
+    details = "Yahoo Finance" if quote["live"] else "saved company profile"
+
+    st.markdown('<div class="fact-row">' + "".join(cards) + '</div>' + f'<div class="fact-source">Price as of {last_date}, {source}. Company details: {details}.</div>', unsafe_allow_html = True)
 
     bits = []
     if quote["sector"]:
