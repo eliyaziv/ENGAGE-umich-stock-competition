@@ -697,7 +697,7 @@ header[data-testid="stHeader"] {
     display: none;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 760px) {
     #mobile-blocker {
         display: flex !important;
         position: fixed !important;
@@ -950,3 +950,39 @@ header[data-testid="stHeader"] {
 .metric-card .metric-card-value { font-size: 15px; }
 .metric-card .metric-card-number { font-size: 34px; font-weight: 700; color: #00274C; display: inline-block;
                                    padding: 0 0.3rem; background: linear-gradient(transparent 62%, #FFCB05 62%); margin: 0.2rem 0; }
+
+[data-testid="stSidebar"],
+[data-testid="stSidebarNav"],
+[data-testid="stSidebarCollapsedControl"],
+[data-testid="stExpandSidebarButton"],
+[data-testid="collapsedControl"] {
+    display: none !important;
+}
+
+.stApp {
+    color-scheme: light;
+}
+
+[data-testid="stMainBlockContainer"],
+[data-testid="stMainBlockContainer"] [data-testid="stMarkdownContainer"],
+[data-testid="stMainBlockContainer"] [data-testid="stMarkdownContainer"] :is(p, li, ul, ol, em, strong, b, sub, sup, a, h1, h2, h3, h4),
+[data-testid="stMainBlockContainer"] [data-testid="stWidgetLabel"] p,
+[data-testid="stMainBlockContainer"] [data-testid="stExpander"] summary,
+[data-testid="stMainBlockContainer"] [data-testid="stExpander"] summary * {
+    color: #00274C;
+}
+
+[data-testid="stMainBlockContainer"] [data-testid="stExpander"] summary {
+    background: #FFFFFF !important;
+}
+
+.metric-card-subtitle, .fact .sub, .fact .label, .fact-source, .slider-hint {
+    color: rgba(0, 39, 76, 0.65) !important;
+}
+.fact .up { color: #1B7F3B !important; }
+.fact .down { color: #B00020 !important; }
+
+[data-testid="stMainBlockContainer"] {
+    width: min(90vw, 1400px) !important;
+    max-width: min(90vw, 1400px) !important;
+}
