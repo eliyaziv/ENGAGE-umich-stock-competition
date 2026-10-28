@@ -1,0 +1,6 @@
+streamlit
+plotly
+numpy
+pandas
+yfinance
+localStoragePy
