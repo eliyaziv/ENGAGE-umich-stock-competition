@@ -1,3 +1,8 @@
+import os
+from pathlib import Path
+
+os.chdir(Path(__file__).resolve().parent.parent)
+
 import streamlit as st
 import base64
 from pathlib import Path
@@ -155,8 +160,8 @@ t &= 0, 1, \dots, 252 \qquad \Delta t = \tfrac{1}{252}
             The model supports the risk section of the report. Rather than committing to a single number for where MAT will trade, it treats the share price as a random walk:
             every trading day the price moves by a small expected drift (μ) plus a random shock whose size is set by the volatility (σ), which is the standard Geometric Brownian Motion
             used in option pricing. Running the walk for 252 days gives one possible year for the share, and running 300 such years gives the fan of paths on the 'Simulate!' page.
-            The red line on the 'Overview' page is the median of those years, and the histogram shows where the 300 years put the price in any month you pick.
-            Volatility is calibrated to MAT's own closes over the last twelve months ({round(realised_vol * 100)}%, or about {round(realised_vol_ex_jumps * 100)}% if the two earnings-driven jumps are left out),
+            The yellow line on the 'Overview' page is the median of those years, and the histogram shows where the 300 years put the price in any month you pick.
+            Volatility is calibrated to MAT's own closes over the last twelve months ({round(realised_vol * 100)}%, or about {round(realised_vol_ex_jumps * 100)}% if the two biggest one-day moves are left out),
             and the default drift is the one that carries the last close to the central case of the thesis (${CENTRAL_CASE:.2f}) within 12 months.
             The point is not to forecast the price but to show how wide the range of outcomes is even if the thesis is right, and how often the central case is reached along the way. <br>
 
