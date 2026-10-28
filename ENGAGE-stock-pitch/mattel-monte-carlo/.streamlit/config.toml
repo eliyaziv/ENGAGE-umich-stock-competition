@@ -1,0 +1,19 @@
+[theme]
+base = "light"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F3F4F6"
+primaryColor = "#FFCB05"
+textColor = "#00274C"
+font = "Garamond"
+headingFont = "Garamond"
+codeFont = "monospace"
+[theme.sidebar]
+font = "Garamond"
+headingFont = "Garamond"
+codeFont = "monospace"
+
+[client]
+showSidebarNavigation = false
+
+[server]
+enableStaticServing = true
