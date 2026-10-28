@@ -1,16 +1,15 @@
+from pathlib import Path
 import numpy as np
 import pandas as pd
 import streamlit as st
 import yfinance as yf
 
-
 TICKER = "MAT"
-PRICE_FILE = "data/mat-prices.csv"
-
+PRICE_FILE = Path(__file__).resolve().parent / "data/mat-prices.csv"
+PRICE_FILE.parent.mkdir(parents=True, exist_ok=True)
 
 @st.cache_data(ttl = 3600)
 def get_history():
-
     try:
         raw = yf.download(TICKER, period = "1y", interval = "1d", auto_adjust = True, progress = False)
         if raw is None or len(raw) < 120:
@@ -37,7 +36,6 @@ def get_history():
 
 @st.cache_data(ttl = 3600)
 def get_quote():
-
     keys = ["marketCap", "beta", "averageVolume", "shortPercentOfFloat", "sector", "industry",
             "city", "state", "country", "fullTimeEmployees", "website", "longBusinessSummary", "longName"]
     out = {k: None for k in keys}
@@ -53,5 +51,4 @@ def get_quote():
             out["earnings_date"] = pd.Timestamp(cal["Earnings Date"][0]).strftime("%d.%m.%Y")
     except Exception:
         pass
-
     return out
