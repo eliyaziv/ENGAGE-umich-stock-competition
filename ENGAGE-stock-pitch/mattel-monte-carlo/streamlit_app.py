@@ -72,17 +72,17 @@ class SingleLinePlot:
     def create_figure(self, fig_title, yaxis_title, xaxis_title, y_min, y_max):
         fig = go.Figure().update_layout(template ="plotly_white", title = fig_title, title_x = 0.5, title_y = 0.94, title_font_weight = 600)
         fig.update_layout(autosize = True)
-        fig.update_layout(font_family = "Georgia", font_weight = 600, font_size = 18)
+        fig.update_layout(font_family = "Georgia", font_weight = 600, font_size = 18, font_color = "#00274C")
         fig.update_layout(paper_bgcolor = "#FFFFFF")
         fig.update_layout(plot_bgcolor = "#FFFFFF")
         fig.update_yaxes(ticksuffix = " ", tickprefix = "$", title = yaxis_title, title_standoff = 20, range = [y_min, y_max], showgrid = True, showline = False, linecolor = "#FFFFFF", zeroline = False, title_font = dict(size = 20), tickfont = dict(size = 18))
-        fig.update_layout(margin=dict(t=0, b=65, l=100, r=0))
+        fig.update_layout(margin=dict(t=45, b=65, l=100, r=0))
         fig.update_xaxes(title = xaxis_title, title_standoff = 20, range = [-0.5, 12], showgrid = True, showline = False, linecolor = "#FFFFFF", zeroline = False, title_font = dict(size = 20), tickfont = dict(size = 18))
         self.plot_data(self.x_data, self.y_data, 3, fig)
 
     def plot_data(self, x_data, y_data, line_width, fig):
 
-        fig.add_trace(go.Scatter(x = x_data, y = y_data, line = dict(width = line_width, color = "#8B0000"), opacity = 1, showlegend=False))
+        fig.add_trace(go.Scatter(x = x_data, y = y_data, line = dict(width = line_width, color = "#FFCB05"), opacity = 1, showlegend=False))
 
         above = [i for i, v in enumerate(y_data) if v >= CENTRAL_CASE]
 
